@@ -4,16 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EaseTechBridge</title>
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+          }
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+    </style>
 </head>
 <body >
-    <a href="/EaseTechBridge.github.io/poilicy.html" style="float: right;">Privacy Policy</a>
-    
+    <div id="loader"  style="position:absolute;width:100%;height:100%;display:none;zindex:1;">
+        <div style="display: flex;justify-content: center;align-items: center;height: 100%;">
+        <div class="loader" style="margin:auto;margin-top:auto;margin-bottom:auto;"></div>
+        </div>
+    </div>
     <h3 style="justify-content:center;margin-left:auto;">Delete my account</h3>
-    <label for="fname">Enter your User ID:</label>
-    <input type="text" id="fname" name="fname"><br><br>
-    <button alt="btnsbmt" id="submit">Submit</button>
-
-
-
+    <label for="useridDele">Enter your User ID:</label>
+    <input type="text" id="useridDele" name="fname"><br><br>
+    <button alt="btnsbmt" id="submitdelbtn" onclick="submitdele()">Submit</button>
+    <a href="/EaseTechBridge.github.io/poilicy.html" style="position:absolute;right:10px;bottom:10px;">Privacy Policy</a>
 </body>
+<script>
+    function submitdele(){
+        document.getElementById('loader').style.display='block';
+        var userid=document.getElementById('useridDele').value;
+        var options={
+            method:'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*' // Allow requests from all origins
+            }
+        }
+        var apiurl="https://kisanvikasbackend.onrender.com/userdelete/delete/"+userid;
+        fetch(apiurl,options)
+            .then((res)=>{return res})
+            .then(data=>{
+                alert("User Successfully Deleted!!")
+                document.getElementById('loader').style.display='none';
+            })
+            .catch((err)=>{
+                console.error("cannot reach to server",err)
+                alert("User Not Deleted. Try Again Later.")
+                document.getElementById('loader').style.display='none';
+            })
+
+    }
+</script>
 </html>

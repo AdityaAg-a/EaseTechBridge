@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EaseTechBridge</title>
+</head>
+<body >
+    <a href="/EaseTechBridge.github.io/poilicy.html" style="float: right;">Privacy Policy</a>
+    
+    <h3 style="justify-content:center;margin-left:auto;">Delete my account</h3>
+    <label for="useridDele">Enter your User ID:</label>
+    <input type="text" id="useridDele" name="fname"><br><br>
+    <button alt="btnsbmt" id="submitdelbtn" onclick="submitdele()">Submit</button>
+</body>
+<script>
+    function submitdele(){
+        var userid=document.getElementById('useridDele').value;
+        var options={
+            method:'DELETE'
+        }
+        var apiurl="https://kisanvikasbackend.onrender.com/userdelete/delete/"+usreid;
+        fetch(apiurl,options)
+            .then((res)=>{return res})
+            .then(data=>{
+                alert("User Successfully Deleted!!")
+            })
+            .catch((err)=>{
+                console.error("cannot reach to server",err)
+                alert("User Not Deleted. Try Again Later.")
+            })
+    }
+</script>
+</html>
